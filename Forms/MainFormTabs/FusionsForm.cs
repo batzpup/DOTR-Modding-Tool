@@ -10,6 +10,7 @@
     private Fusions fusions;
     private BindingListView<Fusion> fusionsBinding;
     private bool fusionDataGridviewIsSetup = false;
+    private bool allowNonPowerUpFusions = true;
 
     private void LoadFusionData()
     {
@@ -49,12 +50,25 @@
       this.FusionsDataGridViewFusionCard.AutoComplete = true;
       this.FusionsDataGridViewFusionCard.FlatStyle = FlatStyle.Flat;
 
-      foreach (CardConstant cardConstant in CardConstant.Monsters)
+      if (allowNonPowerUpFusions)
       {
-        this.FusionsDataGridViewLowerCard.Items.Add(new { LowerCardName = cardConstant.Name, LowerCardIndex = cardConstant.Index });
-        this.FusionsDataGridViewUpperCard.Items.Add(new { UpperCardName = cardConstant.Name, UpperCardIndex = cardConstant.Index });
-        this.FusionsDataGridViewFusionCard.Items.Add(new { FusionCardName = cardConstant.Name, FusionCardIndex = cardConstant.Index });
+        foreach (CardConstant cardConstant in CardConstant.NonPowerUps)
+        {
+          this.FusionsDataGridViewLowerCard.Items.Add(new { LowerCardName = cardConstant.Name, LowerCardIndex = cardConstant.Index, });
+          this.FusionsDataGridViewUpperCard.Items.Add(new { UpperCardName = cardConstant.Name, UpperCardIndex = cardConstant.Index });
+          this.FusionsDataGridViewFusionCard.Items.Add(new { FusionCardName = cardConstant.Name, FusionCardIndex = cardConstant.Index });
+        }
       }
+      else
+      {
+        foreach (CardConstant cardConstant in CardConstant.Monsters)
+        {
+          this.FusionsDataGridViewLowerCard.Items.Add(new { LowerCardName = cardConstant.Name, LowerCardIndex = cardConstant.Index });
+          this.FusionsDataGridViewUpperCard.Items.Add(new { UpperCardName = cardConstant.Name, UpperCardIndex = cardConstant.Index });
+          this.FusionsDataGridViewFusionCard.Items.Add(new { FusionCardName = cardConstant.Name, FusionCardIndex = cardConstant.Index });
+        }
+      }
+    
 
       this.fusionsDataGridView.EditingControlShowing += this.FusionEditControlShowing;
       this.fusionsDataGridView.ColumnHeaderMouseClick += this.fusionsDataGridView_SortColumns;
@@ -131,6 +145,23 @@
       this.dataAccess.SaveFusionData(this.fusions.Bytes);
       this.LoadFusionData();
       MessageBox.Show("All fusion combinations saved.", "Save successful");
+    }
+    
+    
+    private void fusionToggleButton_Click(object sender, EventArgs e)
+    {
+      this.allowNonPowerUpFusions = !allowNonPowerUpFusions;
+      ClearFusionsDataGrid();
+      this.LoadFusionData();
+      
+    }
+
+    void ClearFusionsDataGrid()
+    {
+      this.FusionsDataGridViewLowerCard.Items.Clear();
+      this.FusionsDataGridViewUpperCard.Items.Clear();
+      this.FusionsDataGridViewFusionCard.Items.Clear();
+      fusionDataGridviewIsSetup = false;
     }
   }
 }

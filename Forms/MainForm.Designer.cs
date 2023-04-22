@@ -69,6 +69,7 @@
       this.EnemyAiColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.fusionsTab = new System.Windows.Forms.TabPage();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.allowSpecialFusionsButton = new System.Windows.Forms.CheckBox();  
       this.fusionTableTipLabel = new System.Windows.Forms.Label();
       this.fusionSaveButton = new System.Windows.Forms.Button();
       this.fusionsDataGridView = new System.Windows.Forms.DataGridView();
@@ -555,6 +556,18 @@
       this.fusionsTab.Text = "Fusions";
       this.fusionsTab.UseVisualStyleBackColor = true;
       // 
+      // ToggleAllowSpecialFusionsButton
+      // 
+      this.allowSpecialFusionsButton.Dock = System.Windows.Forms.DockStyle.Right;
+      this.allowSpecialFusionsButton.Location = new System.Drawing.Point(550, 0);
+      this.allowSpecialFusionsButton.Name = "allowSpecialFusionButton";
+      this.allowSpecialFusionsButton.Size = new System.Drawing.Size(200, 50);
+      this.allowSpecialFusionsButton.TabIndex = 0;
+      this.allowSpecialFusionsButton.Text = "Allow Non-Powerup Fusions";
+      this.allowSpecialFusionsButton.UseVisualStyleBackColor = false;
+      this.allowSpecialFusionsButton.Checked = true;
+      this.allowSpecialFusionsButton.Click += new System.EventHandler(this.fusionToggleButton_Click);
+      // 
       // splitContainer2
       // 
       this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -566,6 +579,7 @@
       // splitContainer2.Panel1
       // 
       this.splitContainer2.Panel1.Controls.Add(this.fusionTableTipLabel);
+      this.splitContainer2.Panel1.Controls.Add(this.allowSpecialFusionsButton);
       this.splitContainer2.Panel1.Controls.Add(this.fusionSaveButton);
       // 
       // splitContainer2.Panel2
@@ -1795,6 +1809,7 @@
     private DataGridViewTextBoxColumn EnemyNameColumn;
     private DataGridViewComboBoxColumn EnemyAiColumn;
     private TabPage fusionsTab;
+    private CheckBox allowSpecialFusionsButton;
     private SplitContainer splitContainer2;
     private Label fusionTableTipLabel;
     private Button fusionSaveButton;

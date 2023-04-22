@@ -27,7 +27,7 @@
       setWindowText();
 
       #if DEBUG
-        this.dataAccess.OpenIso("C:\\Users\\Blair\\Desktop\\duelists of the roses\\DOTR_NTSC_TEST.iso");
+        this.dataAccess.OpenIso("C:\\Users\\Batzpup\\Documents\\Ps2Games\\Yu-Gi-Oh! The Duelists of the Roses (USA).iso");
         this.LoadDataFromIso();
         isoIsLoaded = true;
       #else

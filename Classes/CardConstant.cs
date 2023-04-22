@@ -26,6 +26,21 @@ public class CardConstant
 			return List.FindAll(constant => monsterTypes.Contains(constant.CardColor)).ToList<CardConstant>();
 		}
 	}
+	public static List<CardConstant> PowerUps
+	{
+		get
+		{
+			return List.FindAll(card => card.cardKind.Id == 64).ToList<CardConstant>();
+		}
+	}
+
+	public static List<CardConstant> NonPowerUps
+	{
+		get
+		{
+			return List.FindAll(card => card.cardKind.Id != 64).ToList<CardConstant>();
+		}
+	}
 
 	public static byte[] AllBytes
 	{
@@ -40,7 +55,7 @@ public class CardConstant
 	const int maxAttackDefense = 8191;
 	byte[] bytes;
 	byte kind;
-	CardKind cardKind;
+	public CardKind cardKind { get; set; } 
 	byte kindOfs;
 	BitArray levelAttribute;
 	byte level;
@@ -112,7 +127,7 @@ public class CardConstant
 		{
 			this.CardColor = CardColorType.Magic;
 		}
-	}
+  }
 
 	public static ushort GetAttackOrDefense(byte[] bytes)
 	{
